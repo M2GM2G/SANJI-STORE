@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SANJI STORE</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+    
+    :root {
+      --primary-dark: #4a148c;
+      --primary: #7b1fa2;
+      --primary-light: #9c27b0;
+      --white: #ffffff;
+      --light-bg: #f5f5f5;
+      --text-dark: #333;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1), transparent 70%);
+    }
+    
+    .store-name {
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 900;
+      font-size: 2.2rem;
+      color: var(--white);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .important-section {
+      border: 2px solid var(--primary);
+      background-color: var(--white);
+      margin: 1.5rem;
+      padding: 1.2rem;
+      border-radius: 12px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .important-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--primary);
+    }
+    
+    .input-container {
+      margin: 30px auto 15px auto;
+      text-align: center;
+      max-width: 500px;
+    }
+    
+    .input-container label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+    }
+    
+    .input-container input {
+      width: 80%;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 2px solid #ddd;
+      font-size: 1rem;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    .input-container input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.2);
+    }
+    
+    .products-container {
+      margin: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .field {
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 15px;
+      background-color: var(--white);
+      margin: 12px auto;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .field::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(123, 31, 162, 0.1), transparent);
+      transition: width 0.3s ease;
+    }
+    
+    .field:hover::before {
+      width: 100%;
+    }
+    
+    .field:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .field.selected {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(123, 31, 162, 0.3);
+    }
+    
+    .field.selected span {
+      color: white;
+    }
+    
+    .field span {
+      color: var(--primary-dark);
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    
+    .payment-methods {
+      text-align: center;
+      margin: 25px 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .payment-btn {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .payment-btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .payment-btn:hover::after {
+      opacity: 1;
+    }
+    
+    .payment-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .payment-btn:active {
+      transform: translateY(0);
+    }
+    
+    .payment-btn.my-cash {
+      background: linear-gradient(135deg, #6a1b9a, #9c27b0);
+    }
+    
+    .payment-btn.bank {
+      background: linear-gradient(135deg, #c62828, #ef5350);
+    }
+    
+    .payment-details {
+      display: none;
+      width: 90%;
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: var(--white);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid #eee;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .payment-details p {
+      margin: 10px 0;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+    
+    .payment-details p:first-child {
+      margin-top: 0;
+    }
+    
+    .payment-details p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .notice {
+      width: 90%;
+      max-width: 500px;
+      margin: 25px auto;
+      padding: 18px;
+      background: linear-gradient(135deg, #ff0000, #c62828);
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 12px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+      animation: glow 1.5s infinite alternate, pulse 2s infinite;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .notice::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes glow {
+      from { box-shadow: 0 0 10px rgba(255,0,0,0.5); }
+      to { box-shadow: 0 0 20px rgba(255,0,0,0.8); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes shine {
+      to {
+        transform: translateX(100%) translateY(100%) rotate(30deg);
+      }
+    }
+    
+    #checkoutBtn {
+      display: block;
+      width: 90%;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(123, 31, 162, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #checkoutBtn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.7s ease;
+    }
+    
+    #checkoutBtn:hover::before {
+      left: 100%;
+    }
+    
+    #checkoutBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(123, 31, 162, 0.4);
+    }
+    
+    #checkoutBtn:active {
+      transform: translateY(0);
+    }
+    
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary);
+      opacity: 0;
+      z-index: 9999;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+    
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="store-name">𝑺𝑨𝑵𝑱𝑰 ⸙ 𝑺𝑻𝑶𝑹𝑬</h1>
+  </header>
+
+  <div class="important-section">
+    <strong>🔔 مهم:</strong> خدمة الشحن يومياً الساعة 6 مساءً بتوقيت السودان
+  </div>
+
+  <div class="input-container">
+    <label for="player-id">ID</label>
+    <input type="number" id="player-id" maxlength="13" placeholder="أدخل ID الخاص بك">
+  </div>
+
+  <div class="products-container">
+    <div class="field" onclick="selectProduct(this)"><span>2200ج.س</span> ماسة 110 💎</div>
+    <div class="field" onclick="selectProduct(this)"><span>6600ج.س</span> ماسة 330 💎</div>
+    <div class="field" onclick="selectProduct(this)"><span>11000ج.س</span> ماسة 520 💎</div>
+    <div class="field" onclick="selectProduct(this)"><span>22000ج.س</span> ماسة 1160 💎</div>
+    <div class="field" onclick="selectProduct(this)"><span>44000ج.س</span> ماسة 2180 💎</div>
+    <div class="field" onclick="selectProduct(this)"><span>5500ج.س</span> عضوية أسبوعية 📦</div>
+    <div class="field" onclick="selectProduct(this)"><span>17600ج.س</span> عضوية شهرية 📦</div>
+  </div>
+
+  <div class="payment-methods">
+    <button class="payment-btn my-cash" onclick="showPayment('mycash')">ماي كاشي 🟣</button>
+    <button class="payment-btn bank" onclick="showPayment('bank')">بنكك 🔴</button>
+  </div>
+
+  <div id="mycash-details" class="payment-details">
+    <p>رقم الحساب: 710604</p>
+    <p>اسم الحساب: غسان عبد المتعال</p>
+  </div>
+
+  <div id="bank-details" class="payment-details">
+    <p>رقم الحساب: 3011003</p>
+    <p>اسم الحساب: الواثق يوسف</p>
+  </div>
+
+  <div class="notice">
+    ⚠️ يرجى إرسال الشعار بعد الطلب في الواتساب. شكراً لك!
+  </div>
+
+  <button id="checkoutBtn">إتمام عملية الشراء</button>
+
+  <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3" preload="auto"></audio>
+  <audio id="selectSound" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3" preload="auto"></audio>
+  <audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" preload="auto"></audio>
+
+  <script>
+    let selectedProduct = null;
+    const clickSound = document.getElementById('clickSound');
+    const selectSound = document.getElementById('selectSound');
+    const successSound = document.getElementById('successSound');
+    
+    function playSound(sound) {
+      sound.currentTime = 0;
+      sound.play().catch(e => console.log("Sound playback prevented:", e));
+    }
+    
+    function selectProduct(element) {
+      // Remove selected class from all products
+      document.querySelectorAll('.field').forEach(field => {
+        field.classList.remove('selected');
+      });
+      
+      // Add selected class to clicked product
+      element.classList.add('selected');
+      selectedProduct = element.textContent.trim();
+      playSound(selectSound);
+    }
+    
+    function showPayment(type) {
+      playSound(clickSound);
+      document.getElementById('mycash-details').style.display = 'none';
+      document.getElementById('bank-details').style.display = 'none';
+      document.getElementById(type + '-details').style.display = 'block';
+    }
+
+    function createConfetti() {
+      const colors = ['#7b1fa2', '#9c27b0', '#e91e63', '#2196f3', '#4caf50'];
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.width = Math.random() * 10 + 5 + 'px';
+        confetti.style.height = Math.random() * 10 + 5 + 'px';
+        confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+          confetti.remove();
+        }, 3000);
+      }
+    }
+
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+      const idInput = document.getElementById('player-id');
+      if (!idInput.value) {
+        alert('أدخل ID الحساب');
+        return;
+      }
+      
+      if (!selectedProduct) {
+        alert('الرجاء اختيار منتج');
+        return;
+      }
+
+      let paymentDetails = '';
+      if (document.getElementById('mycash-details').style.display === 'block') {
+        paymentDetails = 'ماي كاشي - 710604 - غسان عبد المتعال';
+      } else if (document.getElementById('bank-details').style.display === 'block') {
+        paymentDetails = 'بنك - 3011003 - الواثق يوسف';
+      } else {
+        alert('اختر طريقة الدفع');
+        return;
+      }
+
+      playSound(successSound);
+      createConfetti();
+      
+      setTimeout(() => {
+        const message = `ID: ${idInput.value}\nالمنتج: ${selectedProduct}\nطريقة الدفع: ${paymentDetails}\n\nيرجى إرسال صورة الشعار الآن`;
+        window.open(`https://wa.me/249929263375?text=${encodeURIComponent(message)}`, '_blank');
+      }, 1000);
+    });
+  </script>
+</body>
+    </html>
